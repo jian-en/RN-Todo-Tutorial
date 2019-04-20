@@ -20,3 +20,5 @@ expo start
 3. Draw a background for the app:
     * Create a [LinearGradient](https://docs.expo.io/versions/latest/sdk/linear-gradient/) background with a [color](https://www.color-hex.com/) range
     * Create a [StatusBar](https://facebook.github.io/react-native/docs/statusbar)
+4. Add a header
+    * [Fat Arrow Functions](https://hackernoon.com/getting-to-grips-with-es6-arrow-functions-ebfa62c5c5d6)

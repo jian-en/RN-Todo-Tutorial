@@ -17,3 +17,6 @@ cd my-todos
 expo start
 ```
 2. Create a new **app** folder and add the splash image
+3. Draw a background for the app:
+    * Create a [LinearGradient](https://docs.expo.io/versions/latest/sdk/linear-gradient/) background with a [color](https://www.color-hex.com/) range
+    * Create a [StatusBar](https://facebook.github.io/react-native/docs/statusbar)

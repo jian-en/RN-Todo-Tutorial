@@ -22,6 +22,7 @@ expo start
     * Create a [StatusBar](https://facebook.github.io/react-native/docs/statusbar)
 4. Add a header
     * [Fat Arrow Functions](https://hackernoon.com/getting-to-grips-with-es6-arrow-functions-ebfa62c5c5d6)
-5. Add an input box
+5. Add a subtitle and an input box
+    * [Style](https://facebook.github.io/react-native/docs/style)
     * [TextInput](https://facebook.github.io/react-native/docs/textinput)
     * [State in Component](http://www.reactnativeexpress.com/component_api)

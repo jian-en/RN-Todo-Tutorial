@@ -16,3 +16,4 @@ expo init my-todos
 cd my-todos
 expo start
 ```
+2. Create a new **app** folder and add the splash image

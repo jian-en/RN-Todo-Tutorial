@@ -32,4 +32,9 @@ expo start
     * Add the interactions
     * Add Subtitle and deleteAll buttons
     * Learn to debug the UI
+    
+    
+# Credits
+
+Adapted from this [blog](https://pusher.com/tutorials/build-to-do-app-react-native-expo)
 

@@ -41,3 +41,10 @@ expo start
     * Add the interactions (**onDoneAddItem**, **deleteItem**, **completeItem**, **incompleteItem**, **deleteAllItems**)
     * Add Subtitle and deleteAll buttons
     * Learn to debug the UI
+
+7. Persist the items:
+    * Add [AsyncStorage](https://facebook.github.io/react-native/docs/asyncstorage)
+    * Init the data from the storage. You should get familiar with the [LifecyleAPI](http://www.reactnativeexpress.com/lifecycle_api). We use **componentDidMount** to init data
+    * Add **saveItems** every time the todo list is updated
+    * Check the [Async/Await](https://javascript.info/async-await)
+    * Add [ActivityIndicator](https://facebook.github.io/react-native/docs/activityindicator) when loading the data

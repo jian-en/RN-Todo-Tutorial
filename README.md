@@ -1,4 +1,4 @@
-# Create ToDo App in Reactive Native
+# Create React Native ToDo App in 7 Steps
 <image src="RN-ToDo.gif" width=393 height=758 />
 
 # Credits

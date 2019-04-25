@@ -6,6 +6,9 @@ import {
   Text,
 	StatusBar,
 } from 'react-native';
+
+import uuid from 'uuid/v1';
+
 import { LinearGradient } from 'expo';
 import { primaryGradientArray } from './utils/Colors';
 import Header from './components/Header';
@@ -32,6 +35,32 @@ export default class Main extends React.Component {
     this.setState({
       inputValue: value,
     });
+  };
+
+  onDoneAddItem = () => {
+    const { inputValue } = this.state;
+    if (inputValue !== '') {
+      this.setState(prevState => {
+        const id = uuid();
+        const newItemObject = {
+          [id]: {
+            id,
+            isCompleted: false,
+            text: inputValue,
+            createdAt: Date.now()
+          }
+        };
+        const newState = {
+          ...prevState,
+          inputValue: '',
+          allItems: {
+            ...prevState.allItems,
+            ...newItemObject
+          }
+        };
+        return { ...newState };
+      });
+    }
   };
 
   deleteItem = id => {
@@ -78,7 +107,6 @@ export default class Main extends React.Component {
   	});
   };
 
-
   deleteAllItems = () => {
     this.setState({ allItems: {} });
   };
@@ -93,7 +121,10 @@ export default class Main extends React.Component {
          </View>
          <View style={styles.inputContainer}>
           <SubTitle subtitle={"What's next?"} />
-          <Input inputValue={inputValue} onChangeText={this.newInputValue} />
+          <Input
+            inputValue={inputValue}
+            onChangeText={this.newInputValue}
+            onDoneAddItem={this.onDoneAddItem} />
          </View>
 
          <View style={styles.list}>

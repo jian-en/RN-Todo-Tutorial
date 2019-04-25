@@ -48,3 +48,8 @@ expo start
     * Add **saveItems** every time the todo list is updated
     * Check the [Async/Await](https://javascript.info/async-await)
     * Add [ActivityIndicator](https://facebook.github.io/react-native/docs/activityindicator) when loading the data
+
+
+# More Resources
+
+* [React Native Elements](https://react-native-training.github.io/react-native-elements/)

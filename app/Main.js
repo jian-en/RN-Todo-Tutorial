@@ -5,6 +5,8 @@ import {
 	View,
   Text,
 	StatusBar,
+  AsyncStorage,
+  ActivityIndicator
 } from 'react-native';
 
 import uuid from 'uuid/v1';
@@ -19,16 +21,32 @@ import Button from './components/Button';
 
 const headerTitle = 'Jiango To Do';
 
-const todos = {
-  1: {id: 1, text: 'drinking', isCompleted: true},
-  2: {id: 2, text: 'sleeping', isCompleted: false},
-};
-
 export default class Main extends React.Component {
 
   state = {
     inputValue: '',
-    allItems: todos,
+    allItems: {},
+    loadingItems: false,
+  };
+
+  componentDidMount = () => {
+    this.loadingItems();
+  };
+
+  loadingItems = async () => {
+    try {
+      const allItems = await AsyncStorage.getItem('Todos');
+      this.setState({
+        loadingItems: true,
+        allItems: JSON.parse(allItems) || {}
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  saveItems = newItem => {
+    const saveItem = AsyncStorage.setItem('Todos', JSON.stringify(newItem));
   };
 
   newInputValue = value => {
@@ -58,6 +76,7 @@ export default class Main extends React.Component {
             ...newItemObject
           }
         };
+        this.saveItems(newState.allItems);
         return { ...newState };
       });
     }
@@ -71,6 +90,7 @@ export default class Main extends React.Component {
   			...prevState,
   			...allItems
   		};
+      this.saveItems(newState.allItems);
   		return { ...newState };
   	});
   };
@@ -87,6 +107,7 @@ export default class Main extends React.Component {
   			}
   		  }
       };
+    this.saveItems(newState.allItems);
   	return { ...newState };
     });
   };
@@ -103,16 +124,22 @@ export default class Main extends React.Component {
   				}
   			}
   		};
+      this.saveItems(newState.allItems);
   		return { ...newState };
   	});
   };
 
-  deleteAllItems = () => {
-    this.setState({ allItems: {} });
-  };
+  deleteAllItems = async () => {
+		try {
+			await AsyncStorage.removeItem('Todos');
+			this.setState({ allItems: {} });
+		} catch (err) {
+			console.log(err);
+		}
+	};
 
   render() {
-    const { inputValue, allItems } = this.state;
+    const { inputValue, allItems, loadingItems } = this.state;
     return (
       <LinearGradient colors={primaryGradientArray} style={styles.container}>
          <StatusBar barStyle="light-content" />
@@ -134,19 +161,23 @@ export default class Main extends React.Component {
                <Button deleteAllItems={this.deleteAllItems} />
              </View>
            </View>
-          <ScrollView contentContainerStyle={styles.scrollableList}>
-            {Object.values(allItems)
-              .reverse()
-              .map(item => (
-                <List
-                  key={item.id}
-                  {...item}
-                  deleteItem={this.deleteItem}
-                  completeItem={this.completeItem}
-                  incompleteItem={this.incompleteItem}
-                />
-              ))}
-          </ScrollView>
+           {loadingItems ? (
+ 						<ScrollView contentContainerStyle={styles.scrollableList}>
+ 							{Object.values(allItems)
+ 								.reverse()
+ 								.map(item => (
+ 									<List
+ 										key={item.id}
+ 										{...item}
+ 										deleteItem={this.deleteItem}
+ 										completeItem={this.completeItem}
+ 										incompleteItem={this.incompleteItem}
+ 									/>
+ 								))}
+ 						</ScrollView>
+ 					) : (
+ 						<ActivityIndicator size="large" color="white" />
+ 					)}
         </View>
        </LinearGradient>
     );
